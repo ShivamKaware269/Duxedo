@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout – Duxedo</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<header class="navbar scrolled" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">Dux<span>edo</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="features.html" class="nav-link">Features</a>
+      <a href="pricing.html"  class="nav-link">Pricing</a>
+      <a href="sheets.html"   class="nav-link">Browse Sheets</a>
+      <a href="reviews.html"  class="nav-link">Reviews</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="payment-page">
+  <div class="blob blob-1" style="opacity:.3"></div>
+  <div class="blob blob-2" style="opacity:.2"></div>
+
+  <div class="payment-wrap" id="paymentWrap">
+
+    <!-- LEFT: Order summary -->
+    <div class="payment-left">
+      <div class="section-label" style="margin-bottom:12px;">Secure Checkout</div>
+      <h2 class="payment-title">Complete Your Order</h2>
+      <p class="payment-sub">You're one step away from your print-ready engineering sheet.</p>
+      <div class="order-summary">
+        <div class="order-row"><span class="order-label">Sheet</span><span class="order-val" id="paySheetName">—</span></div>
+        <div class="order-row"><span class="order-label">Format</span><span class="order-val">A3 · Print-Ready PDF</span></div>
+        <div class="order-row"><span class="order-label">Price</span><span class="order-val order-price">₹10.00</span></div>
+        <div class="order-divider"></div>
+        <div class="order-row"><span class="order-label" style="font-weight:700;color:var(--text)">Total</span><span class="order-val order-price" style="font-size:1.2rem">₹10.00</span></div>
+      </div>
+      <div class="security-badges">
+        <div class="sec-badge"><span>🔒</span> SSL Secured</div>
+        <div class="sec-badge"><span>✅</span> Instant PDF</div>
+        <div class="sec-badge"><span>↩️</span> Easy Refund</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Payment form -->
+    <div class="payment-right">
+      <h3 class="pay-form-title">Choose Payment Method</h3>
+
+      <!-- Method selector -->
+      <div class="pay-methods">
+        <button class="pay-method active" data-method="upi-qr">
+          <span class="pay-method-icon">📱</span> Scan QR
+        </button>
+        <button class="pay-method" data-method="upi-id">
+          <span class="pay-method-icon">💸</span> UPI ID
+        </button>
+        <button class="pay-method" data-method="card">
+          <span class="pay-method-icon">💳</span> Card
+        </button>
+        <button class="pay-method" data-method="netbanking">
+          <span class="pay-method-icon">🏦</span> Net Banking
+        </button>
+      </div>
+
+      <!-- QR Scan Panel (default) -->
+      <div class="pay-panel" id="panel-upi-qr">
+        <div class="qr-section">
+          <div class="qr-label-row">
+            <div class="upi-apps-row">
+              <span class="upi-app-badge gpay">G Pay</span>
+              <span class="upi-app-badge phonepay">PhonePe</span>
+              <span class="upi-app-badge paytm">Paytm</span>
+              <span class="upi-app-badge bhim">BHIM</span>
+            </div>
+          </div>
+          <div class="qr-card">
+            <div class="qr-owner-row">
+              <div class="qr-owner-avatar">SK</div>
+              <div>
+                <div class="qr-owner-name">Shivam Kaware</div>
+                <div class="qr-owner-upi">shivamkaware269@oksbi</div>
+              </div>
+            </div>
+            <img src="upi_qr.jpg" alt="UPI QR Code – Scan to pay ₹10" class="qr-image"/>
+            <p class="qr-amount-label">Amount: <strong>₹10</strong></p>
+            <p class="qr-hint">Open any UPI app → Scan QR → Pay ₹10 → Enter UTR below</p>
+          </div>
+          <div class="auth-field" style="margin-top:16px;">
+            <label>UTR / Transaction Reference Number</label>
+            <input type="text" id="utrInput" placeholder="e.g. 123456789012 (12 digits)" maxlength="20" autocomplete="off"/>
+          </div>
+          <p class="pay-hint">After payment, enter the UTR number from your UPI app to verify.</p>
+        </div>
+      </div>
+
+      <!-- UPI ID Panel -->
+      <div class="pay-panel hidden" id="panel-upi-id">
+        <div class="upi-apps-row" style="margin-bottom:16px;">
+          <span class="upi-app-badge gpay">G Pay</span>
+          <span class="upi-app-badge phonepay">PhonePe</span>
+          <span class="upi-app-badge paytm">Paytm</span>
+          <span class="upi-app-badge bhim">BHIM</span>
+        </div>
+        <div class="auth-field">
+          <label>Your UPI ID</label>
+          <input type="text" id="upiIdInput" placeholder="yourname@okaxis / 9876543210@paytm" autocomplete="off"/>
+        </div>
+        <div class="upi-send-box">
+          <p class="upi-send-label">Send ₹10 to:</p>
+          <div class="upi-send-id">
+            <span>shivamkaware269@oksbi</span>
+            <button type="button" class="copy-btn" onclick="navigator.clipboard.writeText('shivamkaware269@oksbi').then(()=>{this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy',1500)})">Copy</button>
+          </div>
+        </div>
+        <div class="auth-field" style="margin-top:14px;">
+          <label>UTR / Transaction Reference Number</label>
+          <input type="text" id="utrInput2" placeholder="e.g. 123456789012" maxlength="20" autocomplete="off"/>
+        </div>
+        <p class="pay-hint">Send ₹10 to the UPI ID above, then enter your UTR reference to unlock the sheet.</p>
+      </div>
+
+      <!-- Card Panel -->
+      <div class="pay-panel hidden" id="panel-card">
+        <div class="card-notice">
+          <span>⚠️</span>
+          <p>For cards, please pay ₹10 via the QR or UPI ID. Card payments are processed manually — enter your card details for our records and we'll verify within 2 hours.</p>
+        </div>
+        <div class="auth-field">
+          <label>Cardholder Name</label>
+          <input type="text" id="cardName" placeholder="As on card" autocomplete="cc-name"/>
+        </div>
+        <div class="auth-field">
+          <label>Card Number</label>
+          <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" inputmode="numeric"/>
+        </div>
+        <div class="pay-row-2">
+          <div class="auth-field"><label>Expiry</label><input type="text" id="cardExp" placeholder="MM / YY" maxlength="7" autocomplete="cc-exp"/></div>
+          <div class="auth-field"><label>CVV</label><input type="password" id="cardCvv" placeholder="•••" maxlength="4" autocomplete="cc-csc" inputmode="numeric"/></div>
+        </div>
+      </div>
+
+      <!-- Net Banking Panel -->
+      <div class="pay-panel hidden" id="panel-netbanking">
+        <div class="card-notice">
+          <span>ℹ️</span>
+          <p>Net banking payments: Transfer ₹10 to UPI ID <strong>shivamkaware269@oksbi</strong> and enter the transaction reference below.</p>
+        </div>
+        <div class="auth-field">
+          <label>Select Bank</label>
+          <select id="bankSelect" class="pay-select">
+            <option value="">-- Choose your bank --</option>
+            <option>State Bank of India</option><option>HDFC Bank</option><option>ICICI Bank</option>
+            <option>Axis Bank</option><option>Kotak Mahindra Bank</option><option>Punjab National Bank</option>
+            <option>Bank of Baroda</option><option>Canara Bank</option><option>Union Bank of India</option><option>Yes Bank</option>
+          </select>
+        </div>
+        <div class="auth-field">
+          <label>Transaction Reference Number</label>
+          <input type="text" id="utrNet" placeholder="e.g. 123456789012" maxlength="20"/>
+        </div>
+      </div>
+
+      <p class="auth-error" id="payError"></p>
+      <button class="btn btn-primary btn-full ripple" id="payNowBtn" style="margin-top:20px;font-size:1rem;padding:16px;">
+        <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Confirm Payment — ₹10
+      </button>
+      <p class="pay-footer-note">By paying you agree to our <a href="terms.html" style="color:var(--primary)">Terms</a> &amp; <a href="privacy.html" style="color:var(--primary)">Privacy Policy</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================
+     POST-PAYMENT SHEET DETAILS FORM
+==================================================== -->
+<div class="auth-overlay hidden" id="sheetDetailsOverlay">
+  <div class="auth-modal sheet-details-modal">
+    <div class="auth-logo" style="margin-bottom:8px;">Dux<span>edo</span></div>
+    <div class="payment-success-badge">✅ Payment Verified!</div>
+    <h3 style="font-size:1.2rem;margin:12px 0 4px;">Fill Your Sheet Details</h3>
+    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:20px;">These details will be printed on your sheet. Fill carefully.</p>
+    <form id="sheetDetailsForm" novalidate>
+      <div class="review-form-row">
+        <div class="auth-field">
+          <label>Sheet Title / Subject</label>
+          <input type="text" id="sTitle" placeholder="e.g. Orthographic Projection" maxlength="60"/>
+        </div>
+        <div class="auth-field">
+          <label>Your Full Name</label>
+          <input type="text" id="sName" placeholder="Arjun Mehta" maxlength="50"/>
+        </div>
+      </div>
+      <div class="review-form-row">
+        <div class="auth-field">
+          <label>Class / Branch</label>
+          <input type="text" id="sClass" placeholder="e.g. SE Mechanical" maxlength="40"/>
+        </div>
+        <div class="auth-field">
+          <label>Roll Number</label>
+          <input type="text" id="sRoll" placeholder="e.g. 22ME047" maxlength="20"/>
+        </div>
+      </div>
+      <div class="review-form-row">
+        <div class="auth-field">
+          <label>Sheet Number</label>
+          <input type="text" id="sSheetNo" placeholder="e.g. Sheet 3" maxlength="20"/>
+        </div>
+        <div class="auth-field">
+          <label>Academic Year</label>
+          <input type="text" id="sYear" placeholder="e.g. 2025–26" maxlength="20"/>
+        </div>
+      </div>
+      <div class="review-form-row">
+        <div class="auth-field">
+          <label>Starting Date</label>
+          <input type="date" id="sStartDate"/>
+        </div>
+        <div class="auth-field">
+          <label>Submission Date</label>
+          <input type="date" id="sSubmitDate"/>
+        </div>
+      </div>
+      <p class="auth-error" id="sheetDetailsError"></p>
+      <button type="submit" class="btn btn-primary btn-full ripple" style="margin-top:10px;">Generate &amp; Download Sheet</button>
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="auth-overlay hidden" id="successOverlay">
+  <div class="auth-modal success-modal">
+    <div class="success-icon">🎉</div>
+    <h2 class="success-title">Sheet Downloaded!</h2>
+    <p class="success-sub">Your customised engineering sheet is ready. Check your downloads folder.</p>
+    <div class="success-details">
+      <div class="order-row"><span class="order-label">Sheet</span><span class="order-val" id="successSheet">—</span></div>
+      <div class="order-row"><span class="order-label">Amount Paid</span><span class="order-val">₹10.00</span></div>
+      <div class="order-row"><span class="order-label">Order ID</span><span class="order-val" id="successOrderId">—</span></div>
+    </div>
+    <a href="sheets.html" class="btn btn-primary ripple" style="width:100%;justify-content:center;margin-top:20px;">Buy Another Sheet</a>
+    <a href="index.html" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:10px;">Back to Home</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

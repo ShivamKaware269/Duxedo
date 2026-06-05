@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Reviews – Duxedo</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<header class="navbar scrolled" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">Dux<span>edo</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="features.html" class="nav-link">Features</a>
+      <a href="pricing.html"  class="nav-link">Pricing</a>
+      <a href="sheets.html"   class="nav-link">Browse Sheets</a>
+      <a href="reviews.html"  class="nav-link" style="color:var(--text)">Reviews</a>
+      <button class="btn btn-nav" id="openAuthBtn">Sign In</button>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="page-hero" style="padding-bottom:40px;">
+  <div class="blob blob-1" style="opacity:.4"></div>
+  <div class="section-label" style="margin-bottom:16px;">What Students Say</div>
+  <h1 class="page-hero-title">Student <span class="gradient-text">Reviews</span></h1>
+  <p class="page-hero-sub">Real feedback from engineering students who use Duxedo every semester.</p>
+  <!-- Stats bar -->
+  <div class="review-stats-bar">
+    <div class="review-stat-item">
+      <span class="review-stat-num" id="totalReviewCount">3</span>
+      <span class="review-stat-label">Total Reviews</span>
+    </div>
+    <div class="review-stat-div"></div>
+    <div class="review-stat-item">
+      <span class="review-stat-num" id="avgRating">5.0</span>
+      <span class="review-stat-label">Average Rating</span>
+    </div>
+    <div class="review-stat-div"></div>
+    <div class="review-stat-item">
+      <span class="review-stat-num">★★★★★</span>
+      <span class="review-stat-label">Overall</span>
+    </div>
+  </div>
+</div>
+
+<main class="reviews-main">
+  <!-- Filter bar -->
+  <div class="reviews-filter-bar">
+    <button class="filter-btn active" data-rating="0">All</button>
+    <button class="filter-btn" data-rating="5">★★★★★</button>
+    <button class="filter-btn" data-rating="4">★★★★</button>
+    <button class="filter-btn" data-rating="3">★★★</button>
+  </div>
+
+  <!-- Reviews grid -->
+  <div class="testimonials-grid reviews-page-grid" id="reviewsPageGrid"></div>
+  <p class="reviews-empty hidden" id="reviewsEmpty">No reviews with this rating yet. Be the first!</p>
+
+  <!-- Write a review -->
+  <div class="review-form-wrap" style="max-width:760px;margin:60px auto 40px;">
+    <h3 class="review-form-title">Write a Review</h3>
+    <p class="review-form-sub">Share your Duxedo experience with other students</p>
+    <form class="review-form" id="reviewFormPage" novalidate>
+      <div class="review-form-row">
+        <div class="review-field">
+          <label>Your Name</label>
+          <input type="text" id="rvName" placeholder="e.g. Sneha Patil" maxlength="40"/>
+        </div>
+        <div class="review-field">
+          <label>College &amp; Year</label>
+          <input type="text" id="rvRole" placeholder="e.g. 2nd Year, VJTI" maxlength="50"/>
+        </div>
+      </div>
+      <div class="review-field">
+        <label>Rating</label>
+        <div class="star-picker" id="starPickerPage">
+          <span class="star-opt" data-val="1">★</span>
+          <span class="star-opt" data-val="2">★</span>
+          <span class="star-opt" data-val="3">★</span>
+          <span class="star-opt" data-val="4">★</span>
+          <span class="star-opt" data-val="5">★</span>
+        </div>
+        <input type="hidden" id="rvRating" value="0"/>
+      </div>
+      <div class="review-field">
+        <label>Your Review</label>
+        <textarea id="rvText" rows="4" placeholder="Tell other students about your Duxedo experience…" maxlength="300"></textarea>
+      </div>
+      <p class="auth-error" id="rvError"></p>
+      <button type="submit" class="btn btn-primary ripple">Post Review</button>
+    </form>
+  </div>
+</main>
+
+<footer class="footer" style="margin-top:40px;">
+  <div class="footer-inner footer-inner--3col">
+    <div class="footer-brand"><a href="index.html" class="nav-logo">Dux<span>edo</span></a><p>Engineering sheets, made effortless.</p></div>
+    <div class="footer-links-group"><h4>Product</h4><a href="index.html#features">Features</a><a href="sheets.html">Browse Sheets</a><a href="reviews.html">Reviews</a></div>
+    <div class="footer-links-group"><h4>Legal</h4><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Duxedo. All rights reserved.</p></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

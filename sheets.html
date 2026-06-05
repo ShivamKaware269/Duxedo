@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse Sheets – Duxedo</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<header class="navbar scrolled" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">Dux<span>edo</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="features.html" class="nav-link">Features</a>
+      <a href="pricing.html"  class="nav-link">Pricing</a>
+      <a href="sheets.html"   class="nav-link" style="color:var(--text)">Browse Sheets</a>
+      <a href="reviews.html"  class="nav-link">Reviews</a>
+      <button class="btn btn-nav" id="openAuthBtn">Sign In</button>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="blob blob-1" style="opacity:.5"></div>
+  <div class="blob blob-2" style="opacity:.4"></div>
+  <div class="section-label" style="margin-bottom:16px;">30 Templates Available</div>
+  <h1 class="page-hero-title">Browse <span class="gradient-text">Engineering Sheets</span></h1>
+  <p class="page-hero-sub">
+    Click any sheet to preview it in full. Hit <strong>₹10 – Buy &amp; Download</strong> to get your personalised, print-ready sheet ASAP.
+  </p>
+</div>
+
+<!-- Category filter bar -->
+<div class="sheets-filter-row" id="sheetsFilterRow">
+  <button class="sheets-filter-btn active" data-cat="all">All Sheets</button>
+  <button class="sheets-filter-btn" data-cat="cad">CAD</button>
+  <button class="sheets-filter-btn" data-cat="drawing">Eng. Drawing</button>
+  <button class="sheets-filter-btn" data-cat="graphics">Eng. Graphics</button>
+  <button class="sheets-filter-btn" data-cat="machine">Machine Drawing</button>
+  <button class="sheets-filter-btn" data-cat="isometric">Isometric</button>
+</div>
+
+<!--
+  SHEETS GRID — 30 cards, 4 per row
+  Cards  1-10 : Real images  (Assets/SHEET-1.png … Assets/SHEET-10.png)
+  Cards 11-30 : Coming Soon  (Assets/SHEET-11.png … Assets/SHEET-30.png)
+                Replace src + remove sheet-coming-badge when ready.
+-->
+<main class="sheets-main">
+  <div class="sheets-grid" id="sheetsGrid">
+
+    <!-- ══════════ CARDS 1–10  (REAL SHEETS) ══════════ -->
+
+    <!-- CARD 1 -->
+    <div class="sheet-card" data-cat="cad" data-id="1">
+      <div class="sheet-img-area" onclick="openPreview(1)">
+        <img src="Assets/SHEET-1.png" alt="Basic AutoCAD Commands – Sheet 1" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Basic AutoCAD Commands</div>
+        <div class="sheet-card-meta">CAD Lab · Lines, Circles, Arcs, Polygons</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(1)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="sheet-card" data-cat="drawing" data-id="2">
+      <div class="sheet-img-area" onclick="openPreview(2)">
+        <img src="Assets/SHEET-2.png" alt="Projection of Points & Lines – Sheet 2" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Projection of Points & Lines</div>
+        <div class="sheet-card-meta">Engineering Graphics · True Length & Inclinations</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(2)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="sheet-card" data-cat="graphics" data-id="3">
+      <div class="sheet-img-area" onclick="openPreview(3)">
+        <img src="Assets/SHEET-3.png" alt="Projection of Lines – Sheet 3" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Projection of Lines</div>
+        <div class="sheet-card-meta">Engineering Graphics · True Length & Inclinations</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(3)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="sheet-card" data-cat="graphics" data-id="4">
+      <div class="sheet-img-area" onclick="openPreview(4)">
+        <img src="Assets/SHEET-4.png" alt="Orthographic Projections – Sheet 4" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Orthographic Projections - 1</div>
+        <div class="sheet-card-meta">Machine Drawing · FV, TV, LHSV & RHSV</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(4)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="sheet-card" data-cat="isometric" data-id="5">
+      <div class="sheet-img-area" onclick="openPreview(5)">
+        <img src="Assets/SHEET-5.png" alt="Isometric Projections – Sheet 5" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Isometric Projections - 1</div>
+        <div class="sheet-card-meta">Engineering Graphics · Isometric Drawing</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(5)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="sheet-card" data-cat="machine" data-id="6">
+      <div class="sheet-img-area" onclick="openPreview(6)">
+        <img src="Assets/SHEET-6.png" alt="Orthographic Projections – Sheet 6" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Orthographic Projections - 2</div>
+        <div class="sheet-card-meta">Machine Drawing · FV, TV, LHSV & RHSV</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(6)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="sheet-card" data-cat="cad drawing" data-id="7">
+      <div class="sheet-img-area" onclick="openPreview(7)">
+        <img src="Assets/SHEET-7.png" alt="Isometric Projections – Sheet 7" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Isometric Projections - 2</div>
+        <div class="sheet-card-meta">Engineering Graphics · Isometric Drawing</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(7)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="sheet-card" data-cat="graphics" data-id="8">
+      <div class="sheet-img-area" onclick="openPreview(8)">
+        <img src="Assets/SHEET-8.png" alt="Projection of Solids – Sheet 8" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Projection of Solids</div>
+        <div class="sheet-card-meta">Engineering Graphics · Solid Projections
+        </div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(8)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="sheet-card" data-cat="graphics" data-id="9">
+      <div class="sheet-img-area" onclick="openPreview(9)">
+        <img src="Assets/SHEET-9.png" alt="Projections of Plane – Sheet 9" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - Projections of Plane</div>
+        <div class="sheet-card-meta">Engineering Graphics · Plane Projections</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(9)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="sheet-card" data-cat="isometric machine" data-id="10">
+      <div class="sheet-img-area" onclick="openPreview(10)">
+        <img src="Assets/SHEET-10.png" alt="House Plan – Sheet 10" class="sheet-img" draggable="false"/>
+        <div class="sheet-real-badge">Real Sheet ✓</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">DUX - House - Plan</div>
+        <div class="sheet-card-meta">CAD Lab · House Plan</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(10)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- ══════════ CARDS 11–30  (COMING SOON) ══════════
+         To activate a card:
+         1. Place SHEET-N.png inside the Assets/ folder.
+         2. Remove the <div class="sheet-coming-badge"> line.
+         3. Change sheet-real-badge text to "Real Sheet ✓" and add it.
+    ════════════════════════════════════════════════ -->
+
+    <!-- CARD 11 -->
+    <div class="sheet-card" data-cat="graphics" data-id="11">
+      <div class="sheet-img-area" onclick="openPreview(11)">
+        <img src="Assets/SHEET-11.png" alt="Section of Solids – Sheet 11" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Section of Solids</div>
+        <div class="sheet-card-meta">Engineering Graphics · Cutting Planes</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(11)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 12 -->
+    <div class="sheet-card" data-cat="graphics" data-id="12">
+      <div class="sheet-img-area" onclick="openPreview(12)">
+        <img src="Assets/SHEET-12.png" alt="Development of Surfaces – Sheet 12" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Development of Surfaces</div>
+        <div class="sheet-card-meta">Engineering Graphics · Surface Unfolding</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(12)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 13 -->
+    <div class="sheet-card" data-cat="isometric" data-id="13">
+      <div class="sheet-img-area" onclick="openPreview(13)">
+        <img src="Assets/SHEET-13.png" alt="Isometric Projections SE 2 – Sheet 13" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Isometric Projections (SE 2)</div>
+        <div class="sheet-card-meta">Engineering Graphics · SE 2 Paper</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(13)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 14 -->
+    <div class="sheet-card" data-cat="machine" data-id="14">
+      <div class="sheet-img-area" onclick="openPreview(14)">
+        <img src="Assets/SHEET-14.png" alt="Screw Thread Conventions – Sheet 14" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Screw Thread Conventions</div>
+        <div class="sheet-card-meta">Machine Drawing · Threaded Fasteners</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(14)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 15 -->
+    <div class="sheet-card" data-cat="machine" data-id="15">
+      <div class="sheet-img-area" onclick="openPreview(15)">
+        <img src="Assets/SHEET-15.png" alt="Rivet Joint Details – Sheet 15" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Rivet Joint Details</div>
+        <div class="sheet-card-meta">Machine Drawing · Riveted Joints</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(15)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 16 -->
+    <div class="sheet-card" data-cat="machine" data-id="16">
+      <div class="sheet-img-area" onclick="openPreview(16)">
+        <img src="Assets/SHEET-16.png" alt="Welded Joint Symbols – Sheet 16" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Welded Joint Symbols</div>
+        <div class="sheet-card-meta">Machine Drawing · Welding Conventions</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(16)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 17 -->
+    <div class="sheet-card" data-cat="machine" data-id="17">
+      <div class="sheet-img-area" onclick="openPreview(17)">
+        <img src="Assets/SHEET-17.png" alt="Rolling Contact Bearing – Sheet 17" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Rolling Contact Bearing</div>
+        <div class="sheet-card-meta">Machine Drawing · Bearing Assembly</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(17)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 18 -->
+    <div class="sheet-card" data-cat="machine" data-id="18">
+      <div class="sheet-img-area" onclick="openPreview(18)">
+        <img src="Assets/SHEET-18.png" alt="Key and Keyway – Sheet 18" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Key &amp; Keyway</div>
+        <div class="sheet-card-meta">Machine Drawing · Shaft Connections</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(18)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 19 -->
+    <div class="sheet-card" data-cat="machine" data-id="19">
+      <div class="sheet-img-area" onclick="openPreview(19)">
+        <img src="Assets/SHEET-19.png" alt="Coupling Assembly – Sheet 19" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Coupling Assembly</div>
+        <div class="sheet-card-meta">Machine Drawing · Shaft Couplings</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(19)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 20 -->
+    <div class="sheet-card" data-cat="drawing" data-id="20">
+      <div class="sheet-img-area" onclick="openPreview(20)">
+        <img src="Assets/SHEET-20.png" alt="Dimensioning Practice – Sheet 20" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Dimensioning Practice</div>
+        <div class="sheet-card-meta">Engineering Drawing · GD&amp;T Basics</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(20)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 21 -->
+    <div class="sheet-card" data-cat="drawing" data-id="21">
+      <div class="sheet-img-area" onclick="openPreview(21)">
+        <img src="Assets/SHEET-21.png" alt="Geometric Tolerancing – Sheet 21" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Geometric Tolerancing</div>
+        <div class="sheet-card-meta">Engineering Drawing · Tolerances &amp; Fits</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(21)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 22 -->
+    <div class="sheet-card" data-cat="graphics" data-id="22">
+      <div class="sheet-img-area" onclick="openPreview(22)">
+        <img src="Assets/SHEET-22.png" alt="Intersection of Solids – Sheet 22" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Intersection of Solids</div>
+        <div class="sheet-card-meta">Engineering Graphics · Interpenetration</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(22)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 23 -->
+    <div class="sheet-card" data-cat="cad" data-id="23">
+      <div class="sheet-img-area" onclick="openPreview(23)">
+        <img src="Assets/SHEET-23.png" alt="Computer-Aided Drawing – Sheet 23" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Computer-Aided Drawing</div>
+        <div class="sheet-card-meta">CAD Lab · 2D CAD Drafting</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(23)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 24 -->
+    <div class="sheet-card" data-cat="drawing" data-id="24">
+      <div class="sheet-img-area" onclick="openPreview(24)">
+        <img src="Assets/SHEET-24.png" alt="Conic Sections – Sheet 24" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Conic Sections</div>
+        <div class="sheet-card-meta">Engineering Drawing · Ellipse, Parabola, Hyperbola</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(24)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 25 -->
+    <div class="sheet-card" data-cat="drawing" data-id="25">
+      <div class="sheet-img-area" onclick="openPreview(25)">
+        <img src="Assets/SHEET-25.png" alt="Special Curves – Sheet 25" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Special Curves</div>
+        <div class="sheet-card-meta">Engineering Drawing · Cycloid, Involute, Helix</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(25)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 26 -->
+    <div class="sheet-card" data-cat="machine" data-id="26">
+      <div class="sheet-img-area" onclick="openPreview(26)">
+        <img src="Assets/SHEET-26.png" alt="Valve Body Section – Sheet 26" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+        </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Valve Body Section</div>
+        <div class="sheet-card-meta">Machine Drawing · Sectional Views</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(26)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 27 -->
+    <div class="sheet-card" data-cat="machine" data-id="27">
+      <div class="sheet-img-area" onclick="openPreview(27)">
+        <img src="Assets/SHEET-27.png" alt="Assembly Drawing – Sheet 27" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Assembly Drawing</div>
+        <div class="sheet-card-meta">Machine Drawing · Component Assembly</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(27)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 28 -->
+    <div class="sheet-card" data-cat="cad" data-id="28">
+      <div class="sheet-img-area" onclick="openPreview(28)">
+        <img src="Assets/SHEET-28.png" alt="3D Modelling Basics – Sheet 28" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">3D Modelling Basics</div>
+        <div class="sheet-card-meta">CAD Lab · Solid Modelling</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(28)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 29 -->
+    <div class="sheet-card" data-cat="isometric" data-id="29">
+      <div class="sheet-img-area" onclick="openPreview(29)">
+        <img src="Assets/SHEET-29.png" alt="Isometric Projections TE Paper – Sheet 29" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Isometric Projections (TE Paper)</div>
+        <div class="sheet-card-meta">Engineering Graphics · TE Exam Pattern</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(29)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+    <!-- CARD 30 -->
+    <div class="sheet-card" data-cat="machine" data-id="30">
+      <div class="sheet-img-area" onclick="openPreview(30)">
+        <img src="Assets/SHEET-30.png" alt="Detailed Part Drawing – Sheet 30" class="sheet-img" draggable="false"/>
+        <div class="sheet-coming-badge">🕐 Coming Soon</div>
+      </div>
+      <div class="sheet-card-body">
+        <div class="sheet-card-title">Detailed Part Drawing</div>
+        <div class="sheet-card-meta">Machine Drawing · Full Detail Drawing</div>
+      </div>
+      <div class="sheet-card-footer">
+        <span class="sheet-price">₹10</span>
+        <button class="btn-buy ripple" onclick="goToPay(30)">Buy &amp; Download</button>
+      </div>
+    </div>
+
+  </div><!-- /sheets-grid -->
+</main>
+
+<!-- PREVIEW MODAL -->
+<div class="preview-overlay hidden" id="previewOverlay">
+  <div class="preview-modal">
+    <button class="auth-close" id="previewClose">✕</button>
+    <h3 class="preview-title" id="previewTitle">Sheet Preview</h3>
+    <div class="preview-img-wrap" id="previewImgWrap">
+      <img id="previewFullImg" src="" alt="Sheet full preview" class="preview-full-img"/>
+    </div>
+    <div class="preview-footer-row">
+      <p class="preview-notice" id="previewNotice">Get your personalised, print-ready PDF for just ₹10</p>
+      <a class="btn btn-primary ripple" id="previewPayBtn" href="#">₹10 – Buy &amp; Download</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer" style="margin-top:80px;">
+  <div class="footer-inner footer-inner--3col">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">Dux<span>edo</span></a>
+      <p>Engineering sheets, made effortless.</p>
+    </div>
+    <div class="footer-links-group">
+      <h4>Product</h4>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sheets.html">Browse Sheets</a>
+      <a href="reviews.html">Reviews</a>
+    </div>
+    <div class="footer-links-group">
+      <h4>Legal</h4>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Duxedo. All rights reserved.</p></div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+/* ── Category filter ── */
+document.querySelectorAll('.sheets-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sheets-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.sheet-card').forEach(card => {
+      const cats = (card.dataset.cat || '').split(' ');
+      card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
+    });
+  });
+});
+
+/* ── Sheet metadata — all 30 sheets ── */
+const SHEETS_META = {
+  1:  { title:'Basic AutoCAD Commands — Sheet 1',            img:'Assets/SHEET-1.png',  comingSoon:false },
+  2:  { title:'2D Object Drawings — Sheet 2',                img:'Assets/SHEET-2.png',  comingSoon:false },
+  3:  { title:'Projection of Points & Lines — Sheet 3',      img:'Assets/SHEET-3.png',  comingSoon:false },
+  4:  { title:'Projection of Lines — Sheet 4',               img:'Assets/SHEET-4.png',  comingSoon:false },
+  5:  { title:'Isometric Projections — Sheet 5',             img:'Assets/SHEET-5.png',  comingSoon:false },
+  6:  { title:'Orthographic Projections — Sheet 6',          img:'Assets/SHEET-6.png',  comingSoon:false },
+  7:  { title:'House Plan — Sheet 7',                        img:'Assets/SHEET-7.png',  comingSoon:false },
+  8:  { title:'Projection of Plane — Sheet 8',               img:'Assets/SHEET-8.png',  comingSoon:false },
+  9:  { title:'Projections of Solids — Sheet 9',             img:'Assets/SHEET-9.png',  comingSoon:false },
+  10: { title:'Orthographic Projections (SE 2) — Sheet 10',  img:'Assets/SHEET-10.png', comingSoon:false },
+  11: { title:'Section of Solids — Sheet 11',                img:'Assets/SHEET-11.png', comingSoon:true  },
+  12: { title:'Development of Surfaces — Sheet 12',          img:'Assets/SHEET-12.png', comingSoon:true  },
+  13: { title:'Isometric Projections (SE 2) — Sheet 13',     img:'Assets/SHEET-13.png', comingSoon:true  },
+  14: { title:'Screw Thread Conventions — Sheet 14',         img:'Assets/SHEET-14.png', comingSoon:true  },
+  15: { title:'Rivet Joint Details — Sheet 15',              img:'Assets/SHEET-15.png', comingSoon:true  },
+  16: { title:'Welded Joint Symbols — Sheet 16',             img:'Assets/SHEET-16.png', comingSoon:true  },
+  17: { title:'Rolling Contact Bearing — Sheet 17',          img:'Assets/SHEET-17.png', comingSoon:true  },
+  18: { title:'Key & Keyway — Sheet 18',                     img:'Assets/SHEET-18.png', comingSoon:true  },
+  19: { title:'Coupling Assembly — Sheet 19',                img:'Assets/SHEET-19.png', comingSoon:true  },
+  20: { title:'Dimensioning Practice — Sheet 20',            img:'Assets/SHEET-20.png', comingSoon:true  },
+  21: { title:'Geometric Tolerancing — Sheet 21',            img:'Assets/SHEET-21.png', comingSoon:true  },
+  22: { title:'Intersection of Solids — Sheet 22',           img:'Assets/SHEET-22.png', comingSoon:true  },
+  23: { title:'Computer-Aided Drawing — Sheet 23',           img:'Assets/SHEET-23.png', comingSoon:true  },
+  24: { title:'Conic Sections — Sheet 24',                   img:'Assets/SHEET-24.png', comingSoon:true  },
+  25: { title:'Special Curves — Sheet 25',                   img:'Assets/SHEET-25.png', comingSoon:true  },
+  26: { title:'Valve Body Section — Sheet 26',               img:'Assets/SHEET-26.png', comingSoon:true  },
+  27: { title:'Assembly Drawing — Sheet 27',                 img:'Assets/SHEET-27.png', comingSoon:true  },
+  28: { title:'3D Modelling Basics — Sheet 28',              img:'Assets/SHEET-28.png', comingSoon:true  },
+  29: { title:'Isometric Projections (TE Paper) — Sheet 29', img:'Assets/SHEET-29.png', comingSoon:true  },
+  30: { title:'Detailed Part Drawing — Sheet 30',            img:'Assets/SHEET-30.png', comingSoon:true  },
+};
+
+function openPreview(id) {
+  const meta = SHEETS_META[id];
+  if (!meta) return;
+  document.getElementById('previewTitle').textContent = meta.title;
+  document.getElementById('previewFullImg').src       = meta.img;
+  document.getElementById('previewPayBtn').href       = 'payment.html?sheet=' + id;
+  document.getElementById('previewNotice').textContent = meta.comingSoon
+    ? '🕐 This sheet is coming soon — stay tuned!'
+    : 'Get your personalised, print-ready PDF for just ₹10';
+  document.getElementById('previewOverlay').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function goToPay(id) {
+  window.location.href = 'payment.html?sheet=' + id;
+}
+
+document.getElementById('previewClose')?.addEventListener('click', () => {
+  document.getElementById('previewOverlay').classList.add('hidden');
+  document.body.style.overflow = '';
+});
+document.getElementById('previewOverlay')?.addEventListener('click', e => {
+  if (e.target === e.currentTarget) {
+    e.currentTarget.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Portal – Duxedo</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- Admin Login Gate -->
+<div class="auth-overlay" id="adminGate">
+  <div class="auth-modal">
+    <div class="auth-logo">Dux<span>edo</span> <span style="font-size:.7rem;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-weight:400;">Admin</span></div>
+    <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:24px;">This area is restricted to administrators only.</p>
+    <div class="auth-field">
+      <label>Admin Password</label>
+      <div class="pw-wrap">
+        <input type="password" id="adminPwInput" placeholder="Enter admin password" autocomplete="off"/>
+        <button type="button" class="pw-toggle" data-target="adminPwInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      </div>
+    </div>
+    <p class="auth-error" id="adminPwError"></p>
+    <button class="btn btn-primary btn-full ripple" id="adminLoginBtn">Enter Portal</button>
+    <div style="margin-top:16px;text-align:center;"><a href="index.html" style="font-size:.82rem;color:var(--text-muted);">← Back to Site</a></div>
+  </div>
+</div>
+
+<!-- Admin Dashboard (hidden until login) -->
+<div class="admin-dashboard hidden" id="adminDashboard">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-brand"><span class="nav-logo" style="font-size:1.2rem;">Dux<span>edo</span></span><span class="admin-badge-tag">Admin</span></div>
+    <nav class="admin-nav">
+      <button class="admin-nav-item active" data-section="overview">📊 Overview</button>
+      <button class="admin-nav-item" data-section="payments">💳 Payments</button>
+      <button class="admin-nav-item" data-section="orders">📋 Sheet Orders</button>
+      <button class="admin-nav-item" data-section="users">👥 Users</button>
+      <button class="admin-nav-item" data-section="reviews">⭐ Reviews</button>
+    </nav>
+    <button class="admin-logout" id="adminLogoutBtn">🚪 Logout</button>
+  </aside>
+
+  <!-- Main content -->
+  <main class="admin-main">
+
+    <!-- ── OVERVIEW ── -->
+    <section class="admin-section active" id="section-overview">
+      <h2 class="admin-section-title">Dashboard Overview</h2>
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon" style="--ic:#6c63ff">💳</div>
+          <div class="admin-stat-val" id="totalPayments">0</div>
+          <div class="admin-stat-label">Total Payments</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon" style="--ic:#22c55e">₹</div>
+          <div class="admin-stat-val" id="totalRevenue">₹0</div>
+          <div class="admin-stat-label">Total Revenue</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon" style="--ic:#f59e0b">📋</div>
+          <div class="admin-stat-val" id="totalOrders">0</div>
+          <div class="admin-stat-label">Sheet Orders</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon" style="--ic:#ec4899">👥</div>
+          <div class="admin-stat-val" id="totalUsers">0</div>
+          <div class="admin-stat-label">Registered Users</div>
+        </div>
+      </div>
+      <h3 class="admin-sub-title">Recent Activity</h3>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="recentTable">
+          <thead><tr><th>Order ID</th><th>User</th><th>Sheet</th><th>Amount</th><th>Method</th><th>UTR</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody id="recentTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── PAYMENTS ── -->
+    <section class="admin-section hidden" id="section-payments">
+      <h2 class="admin-section-title">Payment Records</h2>
+      <div class="admin-filter-row">
+        <input type="text" class="admin-search" id="paySearch" placeholder="Search by name, UTR, sheet…"/>
+        <select class="admin-filter-select" id="payMethodFilter">
+          <option value="">All Methods</option>
+          <option>UPI QR</option><option>UPI ID</option><option>Card</option><option>Net Banking</option>
+        </select>
+        <select class="admin-filter-select" id="payStatusFilter">
+          <option value="">All Status</option>
+          <option>Verified</option><option>Pending</option>
+        </select>
+        <button class="btn btn-primary ripple" style="padding:9px 18px;font-size:.82rem;" onclick="exportCSV('payments')">Export CSV</button>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="paymentsTable">
+          <thead><tr><th>Order ID</th><th>User</th><th>Sheet</th><th>Amount</th><th>Method</th><th>UTR / Ref</th><th>Date &amp; Time</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="paymentsTableBody"></tbody>
+        </table>
+        <p class="admin-empty hidden" id="paymentsEmpty">No payment records yet.</p>
+      </div>
+    </section>
+
+    <!-- ── SHEET ORDERS ── -->
+    <section class="admin-section hidden" id="section-orders">
+      <h2 class="admin-section-title">Sheet Order Details</h2>
+      <div class="admin-filter-row">
+        <input type="text" class="admin-search" id="orderSearch" placeholder="Search by name, roll no, sheet…"/>
+        <select class="admin-filter-select" id="orderClassFilter">
+          <option value="">All Classes</option>
+        </select>
+        <select class="admin-filter-select" id="orderYearFilter">
+          <option value="">All Years</option>
+        </select>
+        <button class="btn btn-primary ripple" style="padding:9px 18px;font-size:.82rem;" onclick="exportCSV('orders')">Export CSV</button>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="ordersTable">
+          <thead><tr><th>Order ID</th><th>Title</th><th>Name</th><th>Class</th><th>Roll No</th><th>Sheet No</th><th>Year</th><th>Start Date</th><th>Submit Date</th><th>Paid On</th></tr></thead>
+          <tbody id="ordersTableBody"></tbody>
+        </table>
+        <p class="admin-empty hidden" id="ordersEmpty">No sheet orders yet.</p>
+      </div>
+    </section>
+
+    <!-- ── USERS ── -->
+    <section class="admin-section hidden" id="section-users">
+      <h2 class="admin-section-title">Registered Users</h2>
+      <div class="admin-filter-row">
+        <input type="text" class="admin-search" id="userSearch" placeholder="Search by name or email/phone…"/>
+        <button class="btn btn-primary ripple" style="padding:9px 18px;font-size:.82rem;" onclick="exportCSV('users')">Export CSV</button>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="usersTable">
+          <thead><tr><th>#</th><th>Name</th><th>Email / Phone</th><th>Registered On</th><th>Total Orders</th></tr></thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+        <p class="admin-empty hidden" id="usersEmpty">No registered users yet.</p>
+      </div>
+    </section>
+
+    <!-- ── REVIEWS ── -->
+    <section class="admin-section hidden" id="section-reviews">
+      <h2 class="admin-section-title">User Reviews</h2>
+      <div class="admin-filter-row">
+        <input type="text" class="admin-search" id="reviewSearch" placeholder="Search reviews…"/>
+        <select class="admin-filter-select" id="reviewRatingFilter">
+          <option value="">All Ratings</option>
+          <option value="5">5 Stars</option><option value="4">4 Stars</option>
+          <option value="3">3 Stars</option><option value="2">2 Stars</option><option value="1">1 Star</option>
+        </select>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="reviewsAdminTable">
+          <thead><tr><th>#</th><th>Name</th><th>College / Year</th><th>Rating</th><th>Review</th><th>Date</th><th>Action</th></tr></thead>
+          <tbody id="reviewsAdminBody"></tbody>
+        </table>
+        <p class="admin-empty hidden" id="reviewsAdminEmpty">No user reviews yet.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
