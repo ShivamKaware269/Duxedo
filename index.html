@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duxedo – Engineering Sheets Made Easy</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ======================================================
+     AUTH MODAL
+====================================================== -->
+<div class="auth-overlay hidden" id="authOverlay">
+  <div class="auth-modal" id="authModal">
+    <button class="auth-close" id="authClose" title="Close">✕</button>
+    <div class="auth-logo">Dux<span>edo</span></div>
+    <div class="auth-tabs" id="authTabBar">
+      <button class="auth-tab active" data-tab="login">Sign In</button>
+      <button class="auth-tab"        data-tab="signup">Create Account</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form class="auth-form" id="loginForm" novalidate>
+      <div class="auth-field">
+        <label for="loginId">Email Address</label>
+        <input type="email" id="loginId" placeholder="email@example.com" autocomplete="email"/>
+      </div>
+      <div class="auth-field">
+        <label for="loginPw">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="loginPw" placeholder="Your password" autocomplete="current-password"/>
+          <button type="button" class="pw-toggle" data-target="loginPw">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="auth-error" id="loginError"></p>
+      <p class="auth-forgot-link" id="forgotTrigger">Forgot your password?</p>
+      <button type="submit" class="btn btn-primary btn-full ripple" style="margin-top:4px;">Sign In</button>
+      <div class="auth-divider"><span>or</span></div>
+      <button type="button" class="btn btn-google btn-full ripple">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:18px;height:18px;margin-right:8px;vertical-align:middle;"/>
+        Continue with Google
+      </button>
+      <p class="auth-switch">No account yet? <span class="auth-switch-link" data-tab="signup">Create one free</span></p>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form class="auth-form hidden" id="signupForm" novalidate>
+      <div class="auth-field">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="e.g. Arjun Mehta" autocomplete="name"/>
+      </div>
+      <div class="auth-field">
+        <label for="signupId">Email Address</label>
+        <input type="email" id="signupId" placeholder="email@example.com" autocomplete="email"/>
+      </div>
+      <div class="auth-field">
+        <label for="signupPw">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="signupPw" placeholder="Min 6 characters" autocomplete="new-password"/>
+          <button type="button" class="pw-toggle" data-target="signupPw">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="auth-field">
+        <label for="signupPw2">Confirm Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="signupPw2" placeholder="Repeat password" autocomplete="new-password"/>
+          <button type="button" class="pw-toggle" data-target="signupPw2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="auth-error" id="signupError"></p>
+      <button type="submit" class="btn btn-primary btn-full ripple">Create Account</button>
+      <div class="auth-divider"><span>or</span></div>
+      <button type="button" class="btn btn-google btn-full ripple">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:18px;height:18px;margin-right:8px;vertical-align:middle;"/>
+        Continue with Google
+      </button>
+      <p class="auth-switch">Already have an account? <span class="auth-switch-link" data-tab="login">Sign in</span></p>
+    </form>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <form class="auth-form hidden" id="forgotForm" novalidate>
+      <div class="forgot-back-row">
+        <button type="button" class="forgot-back-btn" id="forgotBackBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to Sign In
+        </button>
+      </div>
+      <div class="forgot-icon">🔑</div>
+      <h3 class="forgot-title">Reset Password</h3>
+      <p class="forgot-desc">Enter your email address. We'll send you a secure reset link.</p>
+      <div class="auth-field">
+        <label for="forgotId">Email Address</label>
+        <input type="email" id="forgotId" placeholder="email@example.com" autocomplete="email"/>
+      </div>
+      <p class="auth-error" id="forgotError"></p>
+      <p class="auth-success" id="forgotSuccess"></p>
+      <button type="submit" class="btn btn-primary btn-full ripple" id="forgotSubmitBtn" style="margin-top:8px;">Send Reset Link</button>
+    </form>
+
+    <!-- RESET PASSWORD FORM -->
+    <form class="auth-form hidden" id="resetPwForm" novalidate>
+      <div class="forgot-icon">🔐</div>
+      <h3 class="forgot-title">Set New Password</h3>
+      <p class="forgot-desc">Choose a strong password for your account.</p>
+      <div class="auth-field">
+        <label for="resetNewPw">New Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="resetNewPw" placeholder="New password (min 6 chars)" autocomplete="new-password"/>
+          <button type="button" class="pw-toggle" data-target="resetNewPw">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="auth-field">
+        <label for="resetNewPw2">Confirm New Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="resetNewPw2" placeholder="Repeat password" autocomplete="new-password"/>
+          <button type="button" class="pw-toggle" data-target="resetNewPw2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="auth-error" id="resetPwError"></p>
+      <p class="auth-success" id="resetPwSuccess"></p>
+      <button type="submit" class="btn btn-primary btn-full ripple" id="resetPwBtn" style="margin-top:8px;">Update Password</button>
+    </form>
+
+    <!-- LOGGED-IN VIEW -->
+    <div class="auth-logged hidden" id="loggedInView">
+      <div class="auth-avatar" id="authAvatar">?</div>
+      <p class="auth-welcome">Welcome back,</p>
+      <h3 class="auth-uname" id="authUsername">Student</h3>
+      <p class="auth-user-id" id="authUserId"></p>
+      <a href="sheets.html" class="btn btn-primary ripple" style="margin-top:20px;width:100%;justify-content:center;display:inline-flex;">
+        Browse Sheets →
+      </a>
+      <button class="btn btn-ghost" id="logoutBtn" style="margin-top:10px;width:100%;justify-content:center;">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================
+     MOBILE NAV OVERLAY BACKDROP
+====================================================== -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">Dux<span>edo</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html"    class="nav-link nav-link--active">Home</a>
+      <a href="features.html" class="nav-link">Features</a>
+      <a href="pricing.html"  class="nav-link">Pricing</a>
+      <a href="sheets.html"   class="nav-link">Browse Sheets</a>
+      <a href="reviews.html"  class="nav-link">Reviews</a>
+      <button class="btn btn-nav" id="openAuthBtn">Sign In</button>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+<section class="hero" id="home">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Trusted by engineering students across India
+    </div>
+
+    <h1 class="hero-title">
+      Create Perfect<br/>
+      <span class="gradient-text">Engineering Sheets</span><br/>
+      in Seconds
+    </h1>
+
+    <p class="hero-sub">
+      Generate clean, print-ready A3 sheets with your name, roll number and date
+      instantly. <strong>No formatting headaches — ever again.</strong>
+    </p>
+
+    <div class="hero-actions">
+      <a href="sheets.html"   class="btn btn-primary ripple">Browse Sheets — ₹10</a>
+      <a href="features.html" class="btn btn-ghost"><span class="play-icon">▶</span> See How It Works</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">100+</span>
+        <span class="stat-label">Students</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">2k+</span>
+        <span class="stat-label">Sheets Generated</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">₹10</span>
+        <span class="stat-label">Per Sheet</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sheet Mockup Card -->
+  <div class="hero-visual">
+    <div class="sheet-mockup">
+      <div class="sheet-header">
+        <div class="sheet-logo-tag">DUXEDO</div>
+        <div class="sheet-title-row">Engineering Graphics Sheet</div>
+      </div>
+      <div class="sheet-info-row">
+        <div class="sheet-field">
+          <span class="field-label">Name</span>
+          <span class="field-value">Arjun Mehta</span>
+        </div>
+        <div class="sheet-field">
+          <span class="field-label">Roll No.</span>
+          <span class="field-value">22CS047</span>
+        </div>
+        <div class="sheet-field">
+          <span class="field-label">Date</span>
+          <span class="field-value">29 Mar 2026</span>
+        </div>
+      </div>
+      <div class="sheet-grid">
+        <div class="grid-line h"></div><div class="grid-line h"></div>
+        <div class="grid-line h"></div><div class="grid-line h"></div>
+        <div class="grid-line v"></div><div class="grid-line v"></div>
+        <div class="grid-line v"></div><div class="grid-line v"></div>
+        <svg class="sketch-svg" viewBox="0 0 200 160" fill="none">
+          <polygon points="100,20 160,55 160,115 100,150 40,115 40,55"
+            stroke="#6c63ff" stroke-width="1.5" stroke-dasharray="4 3"
+            fill="rgba(108,99,255,0.05)"/>
+          <line x1="100" y1="20"  x2="100" y2="80"  stroke="#6c63ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="40"  y1="55"  x2="100" y2="80"  stroke="#6c63ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="160" y1="55"  x2="100" y2="80"  stroke="#6c63ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="30"  y1="55"  x2="30"  y2="115" stroke="#aaa"    stroke-width="0.8"/>
+          <line x1="26"  y1="55"  x2="34"  y2="55"  stroke="#aaa"    stroke-width="0.8"/>
+          <line x1="26"  y1="115" x2="34"  y2="115" stroke="#aaa"    stroke-width="0.8"/>
+          <text x="18" y="88" fill="#999" font-size="8">60</text>
+        </svg>
+      </div>
+      <div class="sheet-footer-bar">
+        <span>Subject: Engg. Graphics</span>
+        <span class="sheet-stamp">✓ Duxedo Verified</span>
+      </div>
+    </div>
+    <div class="float-badge fb-1">PDF Ready ✓</div>
+    <div class="float-badge fb-2">Instant ⚡</div>
+  </div>
+</section>
+
+<!-- ======================================================
+     QUICK LINKS BAND
+====================================================== -->
+<section class="ql-band">
+  <div class="ql-inner">
+
+    <a href="features.html" class="ql-card">
+      <span class="ql-icon">✨</span>
+      <div class="ql-text">
+        <span class="ql-title">Features</span>
+        <span class="ql-sub">What makes Duxedo great</span>
+      </div>
+    </a>
+
+    <a href="pricing.html" class="ql-card">
+      <span class="ql-icon">₹</span>
+      <div class="ql-text">
+        <span class="ql-title">Pricing</span>
+        <span class="ql-sub">Just ₹10 per sheet, always</span>
+      </div>
+    </a>
+
+    <a href="sheets.html" class="ql-card ql-card--highlight">
+      <span class="ql-icon">📄</span>
+      <div class="ql-text">
+        <span class="ql-title ql-title--accent">Browse Sheets</span>
+        <span class="ql-sub">Templates ready to download</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ======================================================
+     HOW IT WORKS
+====================================================== -->
+<section class="how-it-works" id="how">
+  <div class="section-container">
+    <div class="section-label">Process</div>
+    <h2 class="section-title">Three steps.<br/><span class="gradient-text">Sheet ready.</span></h2>
+
+    <div class="steps-track">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>Browse &amp; Pick</h3>
+          <p>Browse required engineering sheet templates on the sheets page.
+             <strong>Preview the template before buying.</strong></p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>Pay ₹10 via UPI</h3>
+          <p>Scan the QR or send to our UPI ID. Enter your UTR number to verify
+             the payment instantly.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>Fill &amp; Download</h3>
+          <p>Enter your name, roll number, dates and subject. Click Generate —
+             your A3 PDF is ready to print in minutes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     FEATURES PREVIEW
+====================================================== -->
+<section class="features" id="features">
+  <div class="section-container" style="padding-top:40px;">
+    <div class="section-label">Why Duxedo</div>
+    <h2 class="section-title">Everything you need.<br/><span class="gradient-text">Nothing you don't.</span></h2>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#6c63ff">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Easy Customization</h3>
+        <p class="feature-desc">Enter your name, roll number, subject and date.
+          The sheet auto-formats exactly how your college wants it.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#22c55e">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Instant PDF Download</h3>
+        <p class="feature-desc">Get a print-ready A3 PDF delivered to your email inbox after
+          payment verification. Fast and hassle-free.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#f59e0b">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Affordable at ₹10</h3>
+        <p class="feature-desc">Just ₹10 per sheet — less than a chai.
+          No subscriptions, no hidden fees. Pay only for what you need.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#ec4899">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Student Friendly</h3>
+        <p class="feature-desc">Built by an engineering student, for engineering students.
+          Dead simple interface that works on any phone or laptop.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#a78bfa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Sheet Templates</h3>
+        <p class="feature-desc">Professional templates covering the entire engineering
+          graphics curriculum — from AutoCAD basics to machine drawing.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#22c55e">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Secure Payments</h3>
+        <p class="feature-desc">Pay safely via Google Pay, PhonePe, Paytm, BHIM or any UPI app.
+          No card storage, no worries.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#f59e0b">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Personal Account</h3>
+        <p class="feature-desc">Create a free account and keep your purchase history always
+          available — no more hunting for old downloads.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="--icon-color:#ec4899">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Time-Saving</h3>
+        <p class="feature-desc">Students used to spend hours on a sheet from scratch.
+          With Duxedo it takes under a few minutes — start to print.</p>
+      </div>
+
+    </div>
+
+    <div class="features-cta-row">
+      <a href="features.html" class="btn btn-ghost">Explore All Features →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     TESTIMONIALS
+====================================================== -->
+<section class="testimonials">
+  <div class="section-container" style="padding-bottom:64px;">
+    <div class="section-label">Student Reviews</div>
+    <h2 class="section-title">Loved by students<br/><span class="gradient-text">across India</span></h2>
+    <div class="testimonials-grid" id="homeTestimonials"></div>
+    <div class="testi-cta-row">
+      <a href="reviews.html" class="btn btn-ghost">Read All Reviews →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     CTA BAND
+====================================================== -->
+<section class="cta-band">
+  <div class="cta-blob"></div>
+  <h2>Ready to generate your sheet?</h2>
+  <p>Join hundreds of students who've already stopped wasting time on formatting.</p>
+  <a href="sheets.html" class="btn btn-primary ripple">Get Started — ₹10</a>
+</section>
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+<footer class="footer" id="contact">
+  <div class="footer-inner footer-inner--3col">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">Dux<span>edo</span></a>
+      <p>Engineering sheets, made effortless.</p>
+      <div class="social-links">
+        <a href="#" class="social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-links-group">
+      <h4>Product</h4>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sheets.html">Browse Sheets</a>
+      <a href="reviews.html">Reviews</a>
+    </div>
+    <div class="footer-links-group">
+      <h4>Legal &amp; Support</h4>
+      <a href="mailto:hello.duxedo@gmail.com">hello.duxedo@gmail.com</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Duxedo. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
